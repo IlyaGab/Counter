@@ -3,14 +3,13 @@ import UniversalButton from './UniversalButton';
 import c from './UniversalButton.module.css'
 
 type ButtonTypeProps = {
-    name:string
-    count:number
-    setCount:(count:number)=>void
+    name: string
+    count: number
+    setCount: (count: number) => void
 }
 
-
-const Buttons = (props:ButtonTypeProps) => {
-    const incrementButton = () => props.setCount(props.count +1)
+const Buttons = (props: ButtonTypeProps) => {
+    const incrementButton = () => props.setCount(props.count + 1)
     const resetButton = () => props.setCount(0)
     const styleIncrement = {
         backgroundColor: 'rgb(60, 233, 126)'
@@ -21,8 +20,9 @@ const Buttons = (props:ButtonTypeProps) => {
     return (
         <div>
             <div className={c.countButtons}>
-                <UniversalButton name={'Increment'} style={styleIncrement} value={props.count > 4} callBack={incrementButton} />
-                <UniversalButton name={'Reset'} style={styleReset} value={props.count < 1} callBack={resetButton} />
+                <UniversalButton name={'Increment'} style={styleIncrement} value={props.count > 4}
+                                 callBack={incrementButton}/>
+                <UniversalButton name={'Reset'} style={styleReset} value={props.count < 1} callBack={resetButton}/>
             </div>
         </div>
     );
