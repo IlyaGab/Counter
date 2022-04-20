@@ -1,0 +1,70 @@
+body {
+    background-size: 100%;
+    background-color: rgb(203, 247, 247);
+}
+
+.appWrapper {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    border: 3px solid black;
+    border-radius: 20px;
+    margin: 50px auto;
+    background: rgb(126, 126, 126);
+    color: rgb(0, 0, 0);
+}
+
+.titleWrapper {
+    text-align: center;
+    padding: 10px;
+}
+
+.titleWrapper span{
+    font: 40px bold;
+}
+
+.countTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin-top: 30px;
+    font: 35px bold;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 50px;
+    background-color: rgb(203, 247, 247);
+    color: rgb(0, 0, 0);
+}
+
+.countButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    margin: 30px auto;
+    background-color: rgb(203, 247, 247);
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    width: 300px;
+    height: 100px;
+}
+
+.incrementButton {
+    cursor: pointer;
+   width: 100px;
+   height: 30px;
+   background-color: rgb(60, 233, 126);
+   border-radius: 5px;
+   font: 20px bold;
+}
+
+.resetButton {
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 5px;
+    font: 20px bold;
+}
