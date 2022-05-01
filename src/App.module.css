@@ -3,6 +3,11 @@ body {
     background-color: rgb(203, 247, 247);
 }
 
+.appBody {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 .appWrapper {
     display: flex;
     justify-content: center;
