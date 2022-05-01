@@ -11,6 +11,7 @@ type ButtonTypeProps = {
 const Buttons = (props: ButtonTypeProps) => {
     const incrementButton = () => props.setCount(props.count + 1)
     const resetButton = () => props.setCount(0)
+
     const styleIncrement = {
         backgroundColor: 'rgb(60, 233, 126)'
     }
@@ -24,6 +25,7 @@ const Buttons = (props: ButtonTypeProps) => {
                                  callBack={incrementButton}/>
                 <UniversalButton name={'Reset'} style={styleReset} value={props.count < 1} callBack={resetButton}/>
             </div>
+            {/*<div><UniversalButton name={'Set'} callBack={setButton} value={props.count > -1} style={styleReset} /></div>*/}
         </div>
     );
 };
