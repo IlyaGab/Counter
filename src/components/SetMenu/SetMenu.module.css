@@ -1,0 +1,10 @@
+.setMenu {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.setMenu span{
+    width: 120px;
+    font-size: 25px;
+}

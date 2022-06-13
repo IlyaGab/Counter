@@ -29,5 +29,22 @@ body {
     font: 40px bold;
 }
 
+.appMenuWrapper {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    border: 3px solid black;
+    border-radius: 20px;
+    margin: 50px auto;
+    background: rgb(126, 126, 126);
+    color: rgb(0, 0, 0);
+}
 
-
+.titleMenuWrapper {
+    text-align: center;
+    padding: 10px;
+}
+.titleMenuWrapper span{
+    font: 40px bold;
+}

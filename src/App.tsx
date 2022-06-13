@@ -1,59 +1,72 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import './App.css';
 import c from './App.module.css'
-import Buttons from './components/Buttons/Buttons';
-import Display from './components/Display/Display';
-
+import Counter from './components/Counter/Counter';
+import SetMenu from './components/SetMenu/SetMenu';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStateType} from './redux/store';
+import {
+    ChangeMaxValueAC,
+    ChangeMinValueAC,
+    ChangeStatusAC,
+    incCounterValueAC,
+    resCounterValueAC, StatusType
+} from './redux/counter-reducer';
 
 
 function App() {
-    let [count, setCount] = useState(0)
 
-    // useEffect(() => {
-    //     let valuseAsString = localStorage.getItem('counterValue')
-    //     if (valuseAsString) {
-    //         let newValue = JSON.parse(valuseAsString)
-    //         setValue(newValue)
-    //     }
-    // }, [])
-    //
-    // useEffect(() => {
-    //     localStorage.setItem('counterValue', JSON.stringify(value))
-    // }, [value])
+    const count = useSelector<AppStateType, number >( state => state.counter.count)
+    const minValue = useSelector<AppStateType, number >( state => state.counter.minValue)
+    const maxValue = useSelector<AppStateType, number >( state => state.counter.maxValue)
+    const status1 = useSelector<AppStateType, StatusType>(state => state.counter.status)
+    const dispatch = useDispatch()
 
-
-    const incHandler = () => {
-
+    const incHandler = ()=>{
+        dispatch(incCounterValueAC())
+        }
+    const resetHandler = ()=> {
+        dispatch(resCounterValueAC(minValue))
     }
-    const maxValueChangeHandler = (e:ChangeEvent<HTMLInputElement>) =>{
-        localStorage.setItem('maxCounterValue', e.currentTarget.value)
+    const ChangeMinValue = (value: number) => {
+        dispatch(ChangeMinValueAC(value))
+        dispatch(ChangeStatusAC('set'))
+    }
+    const ChangeMaxValue = (value: number) => {
+        dispatch(ChangeMaxValueAC(value))
+        dispatch(ChangeStatusAC('set'))
+    }
+    const changeStatus = (value:StatusType) => {
+        dispatch(ChangeStatusAC(value))
     }
 
-    const minValueChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        localStorage.setItem('minCounterValue', e.currentTarget.value)
-    }
 
     return (
         <div className={c.appBody}>
             <div className={c.appWrapper}>
                 <div className={c.titleWrapper}>
                     <span>Counter</span>
-                    <Display count={count}/>
-                    <Buttons name={'name'} count={count} setCount={setCount}/>
+                    <Counter count={count}
+                             minValue={minValue}
+                             maxValue={maxValue}
+                             Increment={incHandler}
+                             Reset={resetHandler}
+                             status={status1}/>
                 </div>
+
             </div>
-            <div className={c.titleWrapper}>
-                <span>Local storage</span>
-                <h1>{count}</h1>
-                <div>
-                   <span>Max value:</span>
-                    <input name={'maxvalue'} type="number" onChange={maxValueChangeHandler}/>
+            <div className={c.appMenuWrapper}>
+                <div className={c.titleMenuWrapper}>
+                    <span>Set Menu</span>
+                    <SetMenu minValue={minValue}
+                             maxValue={maxValue}
+                             status={status1}
+                             ChangeMinValue={ChangeMinValue}
+                             ChangeMaxValue={ChangeMaxValue}
+                             setStatus={changeStatus}
+                             setCount={resetHandler}
+                    />
                 </div>
-                <div>
-                   <span>Start Value:</span>
-                    <input name={'minvalue'} type="number" onChange={minValueChangeHandler}/>
-                </div>
-                <button onClick={incHandler}>set</button>
             </div>
         </div>
     );

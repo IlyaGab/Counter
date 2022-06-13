@@ -5,17 +5,14 @@ type UniversalButtonPropsType = {
     name: string
     callBack: () => void
     value: boolean
-    style: ButtonColorPropsType
 }
 
-type ButtonColorPropsType = {
-    backgroundColor: string
-}
 
 const UniversalButton = (props: UniversalButtonPropsType) => {
     return (
-        <div>
-            <button className={c.universalButton} style={props.style} disabled={props.value}
+        <div className={c.countButtons}>
+            <button className={c.universalButton}
+                    disabled={props.value}
                     onClick={props.callBack}>{props.name}</button>
         </div>
     );
