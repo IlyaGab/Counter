@@ -3,27 +3,41 @@ import React from 'react';
 import UniversalInput from '../UniversalInput/UniversalInput';
 import UniversalButton from '../Buttons/UniversalButton';
 import c from './SetMenu.module.css'
-import {StatusType} from '../../redux/counter-reducer';
+import {
+    ChangeMaxValueAC,
+    ChangeMinValueAC,
+    ChangeStatusAC,
+    resCounterValueAC,
+    StatusType
+} from '../../redux/counter-reducer';
+import {useDispatch} from 'react-redux';
 
 
 type SetMenuPropsType = {
     minValue: number
     maxValue: number
-    status: string
-    ChangeMinValue: (value: number) => void
-    ChangeMaxValue: (value: number) => void
-    setStatus: (value: StatusType) => void
-    setCount: (minValue: number) => void
+    status: StatusType
 }
 
 const SetMenu = (props: SetMenuPropsType) => {
 
+    const dispatch = useDispatch()
+
+    const ChangeMinValue = (value: number) => {
+        dispatch(ChangeMinValueAC(value))
+        dispatch(ChangeStatusAC('set'))
+    }
+    const ChangeMaxValue = (value: number) => {
+        dispatch(ChangeMaxValueAC(value))
+        dispatch(ChangeStatusAC('set'))
+    }
+
     if (props.maxValue <= props.minValue || props.minValue < 0) {
-        props.setStatus('error')
+        dispatch(ChangeStatusAC('error'))
     }
     const setButtonHandler = () => {
-        props.setStatus('count')
-        props.setCount(props.minValue)
+        dispatch(ChangeStatusAC('count'))
+        dispatch(resCounterValueAC(props.minValue))
     }
 
 
@@ -32,7 +46,7 @@ const SetMenu = (props: SetMenuPropsType) => {
             <div className={c.setMenu}>
                 <span>Max value:</span>
                 <UniversalInput
-                    onChange={props.ChangeMaxValue}
+                    onChange={ChangeMaxValue}
                     value={props.maxValue}
                     error={props.maxValue <= props.minValue || props.maxValue <= 0}
                 />
@@ -41,7 +55,7 @@ const SetMenu = (props: SetMenuPropsType) => {
             <div className={c.setMenu}>
                <span>Min value:</span>
                <UniversalInput
-                   onChange={props.ChangeMinValue}
+                   onChange={ChangeMinValue}
                    value={props.minValue}
                    error={props.status === 'error'}
                />
